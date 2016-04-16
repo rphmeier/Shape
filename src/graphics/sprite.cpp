@@ -24,5 +24,6 @@ void SpriteBatch::end() {
         // update the shader attributes.
         std::cout << "drawing sprite at (" << i->x << ", " << i->y << ").";
     }
+    
     // end the shader
 }

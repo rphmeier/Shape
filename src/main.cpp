@@ -5,6 +5,7 @@
 #include <glbinding/gl/gl.h>
 
 #include "window.h"
+#include "graphics/graphics.h"
 
 // handles game events.
 // returns true if quit requested.
