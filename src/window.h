@@ -11,6 +11,9 @@ namespace Game {
         GameWindow(const GameWindow&) = delete;
         ~GameWindow();
         
+        // Swaps the window's back and front buffers.
+        void swap_buffers();
+        
         
         private:
         SDL_Window* window;
