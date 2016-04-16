@@ -1,7 +1,22 @@
 #include <SDL.h>
+#include <SDL_keyboard.h>
+#include <SDL_keycode.h>
+
 #include <glbinding/gl/gl.h>
 
 #include "window.h"
+
+// handles game events.
+// returns true if quit requested.
+bool handle_events() {
+    bool needs_quit = false;
+    
+    SDL_PumpEvents();
+    auto keyboard = SDL_GetKeyboardState(NULL);
+    if (keyboard[SDL_SCANCODE_ESCAPE] || SDL_QuitRequested()) { needs_quit = true; }
+    
+    return needs_quit;
+}
 
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) != 0) {
@@ -10,12 +25,15 @@ int main(int argc, char** argv) {
     
     Game::GameWindow window;
     
-    gl::glClearColor(0.0, 0.0, 0.0, 0.0);
-    gl::glClear(gl::GL_COLOR_BUFFER_BIT);
-    
-    window.swap_buffers();
-    
-    SDL_Delay(1000);
+    bool running = true;
+    while (running) {
+        gl::glClearColor(0.0, 0.0, 0.0, 0.0);
+        gl::glClear(gl::GL_COLOR_BUFFER_BIT);
+        
+        running = !handle_events();
+        
+        window.swap_buffers();
+    }
     
     SDL_Quit(); 
     return 0;
