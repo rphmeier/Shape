@@ -5,10 +5,29 @@
 
 #include <glbinding/gl/gl.h>
 
-#include "texture.h"
-
-namespace Game { 
+namespace Game {
 namespace Graphics {
+
+/// Compile a shader program.
+gl::GLuint compile_shader(const char* vertex_src, const char* fragment_src);
+
+// A texture is an image.
+class Texture {
+};
+
+// A rectangular view into a texture.
+class TextureView {
+    TextureView(Texture& tex, unsigned int x, unsigned int y,
+                int width, int height) :
+                tex(tex), x(x), y(y), width(width), height(height) {}
+    public:
+    Texture& texture() const { return tex; }
+    
+    private:
+    Texture& tex;
+    unsigned int x, y;
+    int width, height;
+};
 
 class SpriteBatch;
   
@@ -42,6 +61,6 @@ class SpriteBatch {
     std::vector<BatchEntry> sprites;
     gl::GLuint shader_handle;
 };
-    
+
 }
 }

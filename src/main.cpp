@@ -2,10 +2,8 @@
 #include <SDL_keyboard.h>
 #include <SDL_keycode.h>
 
-#include <glbinding/gl/gl.h>
-
 #include "window.h"
-#include "graphics/graphics.h"
+#include "graphics.h"
 
 // handles game events.
 // returns true if quit requested.
