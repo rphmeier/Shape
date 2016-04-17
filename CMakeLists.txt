@@ -9,9 +9,14 @@ add_executable(Shape
 )
 
 find_package(SDL2 REQUIRED)
+find_package(SDL2_Image)
 find_package(glbinding REQUIRED)
 
 set_property(TARGET Shape PROPERTY CXX_STANDARD_REQUIRED 11)
-include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
-target_link_libraries(Shape ${SDL2_LIBRARY} glbinding::glbinding "GL")
+target_link_libraries(Shape 
+    ${SDL2_LIBRARY}
+    ${SDL2_IMAGE_LIBRARIES}
+    glbinding::glbinding "GL"
+)
